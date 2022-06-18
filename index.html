@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Mappa interattiva Contratto di Fiume Misa Nevola</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/ComuniBacinoMisa_4.js"></script>
+        <script src="data/ZoneVulnerabilitNitratiBacinoMisa_5.js"></script>
+        <script src="data/Statocorpiidricisotterranei_6.js"></script>
+        <script src="data/REMUnitEcologicoFunzionali_7.js"></script>
+        <script src="data/REMSistemidiConnessione_8.js"></script>
+        <script src="data/FRANEPAI_9.js"></script>
+        <script src="data/RISCHIOALLUVIONEPGRAAC_10.js"></script>
+        <script src="data/SOTTOBACINIpercentualeimpermeabilizzazione_11.js"></script>
+        <script src="data/Bacino_MisaNevola_13.js"></script>
+        <script src="data/Fiumi_14.js"></script>
+        <script src="data/ReteIdrograficaBacinoMisa_15.js"></script>
+        <script src="data/StatoChimicocorpiidricisuperficiali_16.js"></script>
+        <script src="data/StatoEcologicocorpiidricisuperficiali_17.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[43.47365446886962,12.788209993496817],[43.70553839656853,13.286289991411817]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.createPane('pane_CartoDbPositron_1');
+        map.getPane('pane_CartoDbPositron_1').style.zIndex = 401;
+        var layer_CartoDbPositron_1 = L.tileLayer('http://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            pane: 'pane_CartoDbPositron_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_CartoDbPositron_1;
+        map.addLayer(layer_CartoDbPositron_1);
+        map.createPane('pane_GoogleSatellite_2');
+        map.getPane('pane_GoogleSatellite_2').style.zIndex = 402;
+        var layer_GoogleSatellite_2 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_2',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_GoogleSatellite_2;
+        map.createPane('pane_RischioErosioneSuoliRUSLE_3');
+        map.getPane('pane_RischioErosioneSuoliRUSLE_3').style.zIndex = 403;
+        var img_RischioErosioneSuoliRUSLE_3 = 'data/RischioErosioneSuoliRUSLE_3.png';
+        var img_bounds_RischioErosioneSuoliRUSLE_3 = [[43.34095957338766,12.730439189193147],[43.771117525663755,13.318148132021669]];
+        var layer_RischioErosioneSuoliRUSLE_3 = new L.imageOverlay(img_RischioErosioneSuoliRUSLE_3,
+                                              img_bounds_RischioErosioneSuoliRUSLE_3,
+                                              {pane: 'pane_RischioErosioneSuoliRUSLE_3'});
+        bounds_group.addLayer(layer_RischioErosioneSuoliRUSLE_3);
+        function pop_ComuniBacinoMisa_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMUNE'] !== null ? autolinker.link(feature.properties['COMUNE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ComuniBacinoMisa_4_0() {
+            return {
+                pane: 'pane_ComuniBacinoMisa_4',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        function style_ComuniBacinoMisa_4_1() {
+            return {
+                pane: 'pane_ComuniBacinoMisa_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '1,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_ComuniBacinoMisa_4');
+        map.getPane('pane_ComuniBacinoMisa_4').style.zIndex = 404;
+        map.getPane('pane_ComuniBacinoMisa_4').style['mix-blend-mode'] = 'normal';
+        var layer_ComuniBacinoMisa_4 = new L.geoJson.multiStyle(json_ComuniBacinoMisa_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_ComuniBacinoMisa_4',
+            layerName: 'layer_ComuniBacinoMisa_4',
+            pane: 'pane_ComuniBacinoMisa_4',
+            onEachFeature: pop_ComuniBacinoMisa_4,
+            styles: [style_ComuniBacinoMisa_4_0,style_ComuniBacinoMisa_4_1,]
+        });
+        bounds_group.addLayer(layer_ComuniBacinoMisa_4);
+        function pop_ZoneVulnerabilitNitratiBacinoMisa_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ZoneVulnerabilitNitratiBacinoMisa_5_0() {
+            return {
+                pane: 'pane_ZoneVulnerabilitNitratiBacinoMisa_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,0.6)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_ZoneVulnerabilitNitratiBacinoMisa_5');
+        map.getPane('pane_ZoneVulnerabilitNitratiBacinoMisa_5').style.zIndex = 405;
+        map.getPane('pane_ZoneVulnerabilitNitratiBacinoMisa_5').style['mix-blend-mode'] = 'normal';
+        var layer_ZoneVulnerabilitNitratiBacinoMisa_5 = new L.geoJson(json_ZoneVulnerabilitNitratiBacinoMisa_5, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_ZoneVulnerabilitNitratiBacinoMisa_5',
+            layerName: 'layer_ZoneVulnerabilitNitratiBacinoMisa_5',
+            pane: 'pane_ZoneVulnerabilitNitratiBacinoMisa_5',
+            onEachFeature: pop_ZoneVulnerabilitNitratiBacinoMisa_5,
+            style: style_ZoneVulnerabilitNitratiBacinoMisa_5_0,
+        });
+        bounds_group.addLayer(layer_ZoneVulnerabilitNitratiBacinoMisa_5);
+        function pop_Statocorpiidricisotterranei_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Descrizion'] !== null ? autolinker.link(feature.properties['Descrizion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipo'] !== null ? autolinker.link(feature.properties['tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Statocorpiidricisotterranei_6_0(feature) {
+            switch(String(feature.properties['tipo'])) {
+                case 'ACQUIFERI ALLUVIONALI Vulnerabilità a Rischio':
+                    return {
+                pane: 'pane_Statocorpiidricisotterranei_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.211)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,0.211)',
+                interactive: true,
+            }
+                    break;
+                case 'ACQUIFERI CARBONATICI Vulnerabilità NON a Rischio':
+                    return {
+                pane: 'pane_Statocorpiidricisotterranei_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.211)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,120,180,0.211)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Statocorpiidricisotterranei_6');
+        map.getPane('pane_Statocorpiidricisotterranei_6').style.zIndex = 406;
+        map.getPane('pane_Statocorpiidricisotterranei_6').style['mix-blend-mode'] = 'normal';
+        var layer_Statocorpiidricisotterranei_6 = new L.geoJson(json_Statocorpiidricisotterranei_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Statocorpiidricisotterranei_6',
+            layerName: 'layer_Statocorpiidricisotterranei_6',
+            pane: 'pane_Statocorpiidricisotterranei_6',
+            onEachFeature: pop_Statocorpiidricisotterranei_6,
+            style: style_Statocorpiidricisotterranei_6_0,
+        });
+        bounds_group.addLayer(layer_Statocorpiidricisotterranei_6);
+        function pop_REMUnitEcologicoFunzionali_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Cod_UEF</th>\
+                        <td>' + (feature.properties['Cod_UEF'] !== null ? autolinker.link(feature.properties['Cod_UEF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome</th>\
+                        <td>' + (feature.properties['Nome'] !== null ? autolinker.link(feature.properties['Nome'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tessuto</th>\
+                        <td>' + (feature.properties['Tessuto'] !== null ? autolinker.link(feature.properties['Tessuto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Struttura</th>\
+                        <td>' + (feature.properties['Struttura'] !== null ? autolinker.link(feature.properties['Struttura'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sistema</th>\
+                        <td>' + (feature.properties['Sistema'] !== null ? autolinker.link(feature.properties['Sistema'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_REMUnitEcologicoFunzionali_7_0() {
+            return {
+                pane: 'pane_REMUnitEcologicoFunzionali_7',
+                opacity: 1,
+                color: 'rgba(51,160,44,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_REMUnitEcologicoFunzionali_7');
+        map.getPane('pane_REMUnitEcologicoFunzionali_7').style.zIndex = 407;
+        map.getPane('pane_REMUnitEcologicoFunzionali_7').style['mix-blend-mode'] = 'normal';
+        var layer_REMUnitEcologicoFunzionali_7 = new L.geoJson(json_REMUnitEcologicoFunzionali_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_REMUnitEcologicoFunzionali_7',
+            layerName: 'layer_REMUnitEcologicoFunzionali_7',
+            pane: 'pane_REMUnitEcologicoFunzionali_7',
+            onEachFeature: pop_REMUnitEcologicoFunzionali_7,
+            style: style_REMUnitEcologicoFunzionali_7_0,
+        });
+        bounds_group.addLayer(layer_REMUnitEcologicoFunzionali_7);
+        function pop_REMSistemidiConnessione_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Categoria</th>\
+                        <td>' + (feature.properties['Categoria'] !== null ? autolinker.link(feature.properties['Categoria'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_REMSistemidiConnessione_8_0(feature) {
+            switch(String(feature.properties['Categoria'])) {
+                case 'Core area':
+                    return {
+                pane: 'pane_REMSistemidiConnessione_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,133,113,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sistema di connessione di interesse regionale':
+                    return {
+                pane: 'pane_REMSistemidiConnessione_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(84,202,109,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sistema di connessione locale collegato':
+                    return {
+                pane: 'pane_REMSistemidiConnessione_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(75,196,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sistema di connessione locale non collegato':
+                    return {
+                pane: 'pane_REMSistemidiConnessione_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(158,138,231,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Stepping stone':
+                    return {
+                pane: 'pane_REMSistemidiConnessione_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,239,44,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_REMSistemidiConnessione_8');
+        map.getPane('pane_REMSistemidiConnessione_8').style.zIndex = 408;
+        map.getPane('pane_REMSistemidiConnessione_8').style['mix-blend-mode'] = 'normal';
+        var layer_REMSistemidiConnessione_8 = new L.geoJson(json_REMSistemidiConnessione_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_REMSistemidiConnessione_8',
+            layerName: 'layer_REMSistemidiConnessione_8',
+            pane: 'pane_REMSistemidiConnessione_8',
+            onEachFeature: pop_REMSistemidiConnessione_8,
+            style: style_REMSistemidiConnessione_8_0,
+        });
+        bounds_group.addLayer(layer_REMSistemidiConnessione_8);
+        function pop_FRANEPAI_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Codice</th>\
+                        <td>' + (feature.properties['Codice'] !== null ? autolinker.link(feature.properties['Codice'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rischio</th>\
+                        <td>' + (feature.properties['Rischio'] !== null ? autolinker.link(feature.properties['Rischio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pericolosita</th>\
+                        <td>' + (feature.properties['Pericolosita'] !== null ? autolinker.link(feature.properties['Pericolosita'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FRANEPAI_9_0(feature) {
+            switch(String(feature.properties['Rischio'])) {
+                case 'R1':
+                    return {
+                pane: 'pane_FRANEPAI_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.564)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,0.564)',
+                interactive: true,
+            }
+                    break;
+                case 'R2':
+                    return {
+                pane: 'pane_FRANEPAI_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.564)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,0.564)',
+                interactive: true,
+            }
+                    break;
+                case 'R3':
+                    return {
+                pane: 'pane_FRANEPAI_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.564)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,0.564)',
+                interactive: true,
+            }
+                    break;
+                case 'R4':
+                    return {
+                pane: 'pane_FRANEPAI_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.564)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,0.564)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_FRANEPAI_9');
+        map.getPane('pane_FRANEPAI_9').style.zIndex = 409;
+        map.getPane('pane_FRANEPAI_9').style['mix-blend-mode'] = 'normal';
+        var layer_FRANEPAI_9 = new L.geoJson(json_FRANEPAI_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FRANEPAI_9',
+            layerName: 'layer_FRANEPAI_9',
+            pane: 'pane_FRANEPAI_9',
+            onEachFeature: pop_FRANEPAI_9,
+            style: style_FRANEPAI_9_0,
+        });
+        bounds_group.addLayer(layer_FRANEPAI_9);
+        function pop_RISCHIOALLUVIONEPGRAAC_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Classe Rischio</th>\
+                        <td>' + (feature.properties['riskclass'] !== null ? autolinker.link(feature.properties['riskclass'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">descrizione</th>\
+                        <td>' + (feature.properties['rcdescript'] !== null ? autolinker.link(feature.properties['rcdescript'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RISCHIOALLUVIONEPGRAAC_10_0(feature) {
+            switch(String(feature.properties['riskclass'])) {
+                case 'R1':
+                    return {
+                pane: 'pane_RISCHIOALLUVIONEPGRAAC_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.599)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,251,255,0.599)',
+                interactive: true,
+            }
+                    break;
+                case 'R2':
+                    return {
+                pane: 'pane_RISCHIOALLUVIONEPGRAAC_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.599)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,221,240,0.599)',
+                interactive: true,
+            }
+                    break;
+                case 'R3':
+                    return {
+                pane: 'pane_RISCHIOALLUVIONEPGRAAC_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.599)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,179,216,0.599)',
+                interactive: true,
+            }
+                    break;
+                case 'R4':
+                    return {
+                pane: 'pane_RISCHIOALLUVIONEPGRAAC_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.599)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(40,121,185,0.599)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RISCHIOALLUVIONEPGRAAC_10');
+        map.getPane('pane_RISCHIOALLUVIONEPGRAAC_10').style.zIndex = 410;
+        map.getPane('pane_RISCHIOALLUVIONEPGRAAC_10').style['mix-blend-mode'] = 'normal';
+        var layer_RISCHIOALLUVIONEPGRAAC_10 = new L.geoJson(json_RISCHIOALLUVIONEPGRAAC_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RISCHIOALLUVIONEPGRAAC_10',
+            layerName: 'layer_RISCHIOALLUVIONEPGRAAC_10',
+            pane: 'pane_RISCHIOALLUVIONEPGRAAC_10',
+            onEachFeature: pop_RISCHIOALLUVIONEPGRAAC_10,
+            style: style_RISCHIOALLUVIONEPGRAAC_10_0,
+        });
+        bounds_group.addLayer(layer_RISCHIOALLUVIONEPGRAAC_10);
+        function pop_SOTTOBACINIpercentualeimpermeabilizzazione_11(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nome Asta</th>\
+                        <td>' + (feature.properties['SCR_ASTA'] !== null ? autolinker.link(feature.properties['SCR_ASTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Area territorio impermeabilizzato</th>\
+                        <td>' + (feature.properties['A_imp'] !== null ? autolinker.link(feature.properties['A_imp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Area sottobacino</th>\
+                        <td>' + (feature.properties['A_sottobacino'] !== null ? autolinker.link(feature.properties['A_sottobacino'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Percentuale impermeabilizzato</th>\
+                        <td>' + (feature.properties['Perc_SC'] !== null ? autolinker.link(feature.properties['Perc_SC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SOTTOBACINIpercentualeimpermeabilizzazione_11_0() {
+            return {
+                pane: 'pane_SOTTOBACINIpercentualeimpermeabilizzazione_11',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SOTTOBACINIpercentualeimpermeabilizzazione_11');
+        map.getPane('pane_SOTTOBACINIpercentualeimpermeabilizzazione_11').style.zIndex = 411;
+        map.getPane('pane_SOTTOBACINIpercentualeimpermeabilizzazione_11').style['mix-blend-mode'] = 'normal';
+        var layer_SOTTOBACINIpercentualeimpermeabilizzazione_11 = new L.geoJson(json_SOTTOBACINIpercentualeimpermeabilizzazione_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SOTTOBACINIpercentualeimpermeabilizzazione_11',
+            layerName: 'layer_SOTTOBACINIpercentualeimpermeabilizzazione_11',
+            pane: 'pane_SOTTOBACINIpercentualeimpermeabilizzazione_11',
+            onEachFeature: pop_SOTTOBACINIpercentualeimpermeabilizzazione_11,
+            style: style_SOTTOBACINIpercentualeimpermeabilizzazione_11_0,
+        });
+        bounds_group.addLayer(layer_SOTTOBACINIpercentualeimpermeabilizzazione_11);
+        map.createPane('pane_consumosuolo2020_12');
+        map.getPane('pane_consumosuolo2020_12').style.zIndex = 412;
+        var img_consumosuolo2020_12 = 'data/consumosuolo2020_12.png';
+        var img_bounds_consumosuolo2020_12 = [[43.4309233857065,12.861772024798874],[43.73297998857521,13.222739122035431]];
+        var layer_consumosuolo2020_12 = new L.imageOverlay(img_consumosuolo2020_12,
+                                              img_bounds_consumosuolo2020_12,
+                                              {pane: 'pane_consumosuolo2020_12'});
+        bounds_group.addLayer(layer_consumosuolo2020_12);
+        function pop_Bacino_MisaNevola_13(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Bacino_MisaNevola_13_0() {
+            return {
+                pane: 'pane_Bacino_MisaNevola_13',
+                opacity: 1,
+                color: 'rgba(243,31,31,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Bacino_MisaNevola_13');
+        map.getPane('pane_Bacino_MisaNevola_13').style.zIndex = 413;
+        map.getPane('pane_Bacino_MisaNevola_13').style['mix-blend-mode'] = 'normal';
+        var layer_Bacino_MisaNevola_13 = new L.geoJson(json_Bacino_MisaNevola_13, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Bacino_MisaNevola_13',
+            layerName: 'layer_Bacino_MisaNevola_13',
+            pane: 'pane_Bacino_MisaNevola_13',
+            onEachFeature: pop_Bacino_MisaNevola_13,
+            style: style_Bacino_MisaNevola_13_0,
+        });
+        bounds_group.addLayer(layer_Bacino_MisaNevola_13);
+        map.addLayer(layer_Bacino_MisaNevola_13);
+        function pop_Fiumi_14(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Fiume</th>\
+                        <td>' + (feature.properties['NOME_SCR'] !== null ? autolinker.link(feature.properties['NOME_SCR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lunghezza m </th>\
+                        <td>' + (feature.properties['L'] !== null ? autolinker.link(feature.properties['L'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Fiumi_14_0() {
+            return {
+                pane: 'pane_Fiumi_14',
+                opacity: 1,
+                color: 'rgba(0,205,239,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Fiumi_14');
+        map.getPane('pane_Fiumi_14').style.zIndex = 414;
+        map.getPane('pane_Fiumi_14').style['mix-blend-mode'] = 'normal';
+        var layer_Fiumi_14 = new L.geoJson(json_Fiumi_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Fiumi_14',
+            layerName: 'layer_Fiumi_14',
+            pane: 'pane_Fiumi_14',
+            onEachFeature: pop_Fiumi_14,
+            style: style_Fiumi_14_0,
+        });
+        bounds_group.addLayer(layer_Fiumi_14);
+        map.addLayer(layer_Fiumi_14);
+        function pop_ReteIdrograficaBacinoMisa_15(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nome</th>\
+                        <td>' + (feature.properties['NOME_SCR'] !== null ? autolinker.link(feature.properties['NOME_SCR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lunghezza</th>\
+                        <td>' + (feature.properties['L'] !== null ? autolinker.link(feature.properties['L'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ReteIdrograficaBacinoMisa_15_0() {
+            return {
+                pane: 'pane_ReteIdrograficaBacinoMisa_15',
+                opacity: 1,
+                color: 'rgba(0,205,239,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ReteIdrograficaBacinoMisa_15');
+        map.getPane('pane_ReteIdrograficaBacinoMisa_15').style.zIndex = 415;
+        map.getPane('pane_ReteIdrograficaBacinoMisa_15').style['mix-blend-mode'] = 'normal';
+        var layer_ReteIdrograficaBacinoMisa_15 = new L.geoJson(json_ReteIdrograficaBacinoMisa_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ReteIdrograficaBacinoMisa_15',
+            layerName: 'layer_ReteIdrograficaBacinoMisa_15',
+            pane: 'pane_ReteIdrograficaBacinoMisa_15',
+            onEachFeature: pop_ReteIdrograficaBacinoMisa_15,
+            style: style_ReteIdrograficaBacinoMisa_15_0,
+        });
+        bounds_group.addLayer(layer_ReteIdrograficaBacinoMisa_15);
+        function pop_StatoChimicocorpiidricisuperficiali_16(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Eco'] !== null ? autolinker.link(feature.properties['Eco'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Chim'] !== null ? autolinker.link(feature.properties['Chim'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_StatoChimicocorpiidricisuperficiali_16_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_StatoChimicocorpiidricisuperficiali_16rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_StatoChimicocorpiidricisuperficiali_16',
+                opacity: 1,
+                color: 'rgba(79,254,1,1.0)',
+                dashArray: '1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            };
+                }
+                else if (exp_StatoChimicocorpiidricisuperficiali_16rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_StatoChimicocorpiidricisuperficiali_16',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_StatoChimicocorpiidricisuperficiali_16');
+        map.getPane('pane_StatoChimicocorpiidricisuperficiali_16').style.zIndex = 416;
+        map.getPane('pane_StatoChimicocorpiidricisuperficiali_16').style['mix-blend-mode'] = 'normal';
+        var layer_StatoChimicocorpiidricisuperficiali_16 = new L.geoJson(json_StatoChimicocorpiidricisuperficiali_16, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_StatoChimicocorpiidricisuperficiali_16',
+            layerName: 'layer_StatoChimicocorpiidricisuperficiali_16',
+            pane: 'pane_StatoChimicocorpiidricisuperficiali_16',
+            onEachFeature: pop_StatoChimicocorpiidricisuperficiali_16,
+            style: style_StatoChimicocorpiidricisuperficiali_16_0,
+        });
+        bounds_group.addLayer(layer_StatoChimicocorpiidricisuperficiali_16);
+        function pop_StatoEcologicocorpiidricisuperficiali_17(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Eco'] !== null ? autolinker.link(feature.properties['Eco'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Chim'] !== null ? autolinker.link(feature.properties['Chim'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_StatoEcologicocorpiidricisuperficiali_17_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_StatoEcologicocorpiidricisuperficiali_17rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_StatoEcologicocorpiidricisuperficiali_17',
+                opacity: 1,
+                color: 'rgba(79,254,1,1.0)',
+                dashArray: '1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            };
+                }
+                else if (exp_StatoEcologicocorpiidricisuperficiali_17rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_StatoEcologicocorpiidricisuperficiali_17',
+                opacity: 1,
+                color: 'rgba(243,243,41,1.0)',
+                dashArray: '1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            };
+                }
+                else if (exp_StatoEcologicocorpiidricisuperficiali_17rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_StatoEcologicocorpiidricisuperficiali_17',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            };
+                }
+                else if (exp_StatoEcologicocorpiidricisuperficiali_17rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_StatoEcologicocorpiidricisuperficiali_17',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_StatoEcologicocorpiidricisuperficiali_17');
+        map.getPane('pane_StatoEcologicocorpiidricisuperficiali_17').style.zIndex = 417;
+        map.getPane('pane_StatoEcologicocorpiidricisuperficiali_17').style['mix-blend-mode'] = 'normal';
+        var layer_StatoEcologicocorpiidricisuperficiali_17 = new L.geoJson(json_StatoEcologicocorpiidricisuperficiali_17, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_StatoEcologicocorpiidricisuperficiali_17',
+            layerName: 'layer_StatoEcologicocorpiidricisuperficiali_17',
+            pane: 'pane_StatoEcologicocorpiidricisuperficiali_17',
+            onEachFeature: pop_StatoEcologicocorpiidricisuperficiali_17,
+            style: style_StatoEcologicocorpiidricisuperficiali_17_0,
+        });
+        bounds_group.addLayer(layer_StatoEcologicocorpiidricisuperficiali_17);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Mappa interattiva Contratto di Fiume Misa Nevola</h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'topright'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+
+                    abstract.show();
+                    return this._div;
+                };
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'Apri la legenda, seleziona i Livelli informativi, visualizza le informazioni cliccando sul singolo elemento.<br />ATTENZIONE: le informazioni riportate, a solo scopo informativo, non sostituiscono la validità delle rispettive fonti ufficiali.';
+            };
+            abstract.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {"Google Satellite": layer_GoogleSatellite_2,"CartoDb Positron": layer_CartoDbPositron_1,"OpenStreetMap": layer_OpenStreetMap_0};
+        L.control.layers(baseMaps,{'Stato Ecologico corpi idrici superficiali<br /><table><tr><td style="text-align: center;"><img src="legend/StatoEcologicocorpiidricisuperficiali_17_Buono0.png" /></td><td>Buono</td></tr><tr><td style="text-align: center;"><img src="legend/StatoEcologicocorpiidricisuperficiali_17_Sufficiente1.png" /></td><td>Sufficiente</td></tr><tr><td style="text-align: center;"><img src="legend/StatoEcologicocorpiidricisuperficiali_17_Scarso2.png" /></td><td>Scarso</td></tr><tr><td style="text-align: center;"><img src="legend/StatoEcologicocorpiidricisuperficiali_17_Cattivo3.png" /></td><td>Cattivo</td></tr></table>': layer_StatoEcologicocorpiidricisuperficiali_17,'Stato Chimico corpi idrici superficiali<br /><table><tr><td style="text-align: center;"><img src="legend/StatoChimicocorpiidricisuperficiali_16_StatoChimicoBuono0.png" /></td><td>Stato Chimico Buono</td></tr><tr><td style="text-align: center;"><img src="legend/StatoChimicocorpiidricisuperficiali_16_StatoChimicoCattivo1.png" /></td><td>Stato Chimico Cattivo</td></tr></table>': layer_StatoChimicocorpiidricisuperficiali_16,'<img src="legend/ReteIdrograficaBacinoMisa_15.png" /> Rete Idrografica Bacino Misa': layer_ReteIdrograficaBacinoMisa_15,'<img src="legend/Fiumi_14.png" /> Fiumi': layer_Fiumi_14,'<img src="legend/Bacino_MisaNevola_13.png" /> Bacino_MisaNevola': layer_Bacino_MisaNevola_13,"consumo suolo 2020": layer_consumosuolo2020_12,'<img src="legend/SOTTOBACINIpercentualeimpermeabilizzazione_11.png" /> SOTTOBACINI percentuale impermeabilizzazione': layer_SOTTOBACINIpercentualeimpermeabilizzazione_11,'RISCHIO ALLUVIONE PGRAAC<br /><table><tr><td style="text-align: center;"><img src="legend/RISCHIOALLUVIONEPGRAAC_10_R10.png" /></td><td>R1</td></tr><tr><td style="text-align: center;"><img src="legend/RISCHIOALLUVIONEPGRAAC_10_R21.png" /></td><td>R2</td></tr><tr><td style="text-align: center;"><img src="legend/RISCHIOALLUVIONEPGRAAC_10_R32.png" /></td><td>R3</td></tr><tr><td style="text-align: center;"><img src="legend/RISCHIOALLUVIONEPGRAAC_10_R43.png" /></td><td>R4</td></tr></table>': layer_RISCHIOALLUVIONEPGRAAC_10,'FRANE PAI<br /><table><tr><td style="text-align: center;"><img src="legend/FRANEPAI_9_R10.png" /></td><td>R1</td></tr><tr><td style="text-align: center;"><img src="legend/FRANEPAI_9_R21.png" /></td><td>R2</td></tr><tr><td style="text-align: center;"><img src="legend/FRANEPAI_9_R32.png" /></td><td>R3</td></tr><tr><td style="text-align: center;"><img src="legend/FRANEPAI_9_R43.png" /></td><td>R4</td></tr></table>': layer_FRANEPAI_9,'REM Sistemi di Connessione<br /><table><tr><td style="text-align: center;"><img src="legend/REMSistemidiConnessione_8_Corearea0.png" /></td><td>Core area</td></tr><tr><td style="text-align: center;"><img src="legend/REMSistemidiConnessione_8_Sistemadiconnessionediinteresseregionale1.png" /></td><td>Sistema di connessione di interesse regionale</td></tr><tr><td style="text-align: center;"><img src="legend/REMSistemidiConnessione_8_Sistemadiconnessionelocalecollegato2.png" /></td><td>Sistema di connessione locale collegato</td></tr><tr><td style="text-align: center;"><img src="legend/REMSistemidiConnessione_8_Sistemadiconnessionelocalenoncollegato3.png" /></td><td>Sistema di connessione locale non collegato</td></tr><tr><td style="text-align: center;"><img src="legend/REMSistemidiConnessione_8_Steppingstone4.png" /></td><td>Stepping stone</td></tr></table>': layer_REMSistemidiConnessione_8,'<img src="legend/REMUnitEcologicoFunzionali_7.png" /> REM Unità Ecologico Funzionali': layer_REMUnitEcologicoFunzionali_7,'Stato corpi idrici sotterranei<br /><table><tr><td style="text-align: center;"><img src="legend/Statocorpiidricisotterranei_6_ACQUIFERIALLUVIONALIVulnerabilitàaRischio0.png" /></td><td>ACQUIFERI ALLUVIONALI Vulnerabilità a Rischio</td></tr><tr><td style="text-align: center;"><img src="legend/Statocorpiidricisotterranei_6_ACQUIFERICARBONATICIVulnerabilitàNONaRischio1.png" /></td><td>ACQUIFERI CARBONATICI Vulnerabilità NON a Rischio</td></tr></table>': layer_Statocorpiidricisotterranei_6,'<img src="legend/ZoneVulnerabilitNitratiBacinoMisa_5.png" /> Zone Vulnerabilità Nitrati Bacino Misa': layer_ZoneVulnerabilitNitratiBacinoMisa_5,'<img src="legend/ComuniBacinoMisa_4.png" /> Comuni Bacino Misa': layer_ComuniBacinoMisa_4,"Rischio Erosione Suoli RUSLE": layer_RischioErosioneSuoliRUSLE_3,}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_ComuniBacinoMisa_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['COMUNE'] !== null?String('<div style="color: #000000; font-size: 11pt; font-weight: bold; font-family: \'Ubuntu\', sans-serif;">' + layer.feature.properties['COMUNE']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ComuniBacinoMisa_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_REMUnitEcologicoFunzionali_7.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Cod_UEF'] !== null?String('<div style="color: #000000; font-size: 14pt; font-family: \'Ubuntu\', sans-serif;">' + layer.feature.properties['Cod_UEF']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_REMUnitEcologicoFunzionali_7'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Fiumi_14.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NOME_SCR'] !== null?String('<div style="color: #1f78b4; font-size: 12pt; font-weight: bold; font-family: \'Ubuntu\', sans-serif;">' + layer.feature.properties['NOME_SCR']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Fiumi_14'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        resetLabels([layer_ComuniBacinoMisa_4,layer_REMUnitEcologicoFunzionali_7,layer_Fiumi_14]);
+        map.on("zoomend", function(){
+            resetLabels([layer_ComuniBacinoMisa_4,layer_REMUnitEcologicoFunzionali_7,layer_Fiumi_14]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_ComuniBacinoMisa_4,layer_REMUnitEcologicoFunzionali_7,layer_Fiumi_14]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_ComuniBacinoMisa_4,layer_REMUnitEcologicoFunzionali_7,layer_Fiumi_14]);
+        });
+        </script>
+    </body>
+</html>
